@@ -34,6 +34,7 @@ idlist = []
 idlist.append(startUid)
 cnt = 0
 result = {}
+logfile = open('log.txt','w+')
 
 for idx in idlist: 
     if cnt>10:
@@ -50,6 +51,7 @@ for idx in idlist:
             result[user['screen_name']] = 1
     cnt += 1
     print(cnt)
+    logfile.write('cnt: '+str(cnt)+'\n')
 
 #根据出现频次排序
 result = sorted(result.items(),key=lambda x:x[1],reverse=True)
