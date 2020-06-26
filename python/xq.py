@@ -28,16 +28,15 @@ def HttpRequest(url):
         #print(content)
         return content
 
-url = 'https://api.xueqiu.com/friendships/groups/members.json?count=5&gid=0&uid='
+url = 'https://api.xueqiu.com/friendships/groups/members.json?count=200&gid=0&uid='
 startUid = 4111857140 #@山行
 idlist = []
 idlist.append(startUid)
 cnt = 0
 result = {}
-logfile = open('log.txt','w+')
 
 for idx in idlist: 
-    if cnt>10:
+    if cnt>40000:
         break
 
     response = HttpRequest(url+str(idx))
@@ -51,7 +50,6 @@ for idx in idlist:
             result[user['screen_name']] = 1
     cnt += 1
     print(cnt)
-    logfile.write('cnt: '+str(cnt)+'\n')
 
 #根据出现频次排序
 result = sorted(result.items(),key=lambda x:x[1],reverse=True)
